@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slider</title>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!--<script src="//code.jquery.com/jquery.min.js"></script>-->
+    <link rel="stylesheet" href="main.css">
+
+
+</head>
+<body>
+<div class="container col-md-12  ">
+    <div class="center">
+
+
+    <div class="text-center">
+        <h2>Image Slider using jquery</h2>
+    </div>
+    <div class="NoPaddingMarging align-middle">
+        <div id="MainDiv">
+            <img src="slider1.jpg" alt="About Us" id="MainImage"  width="800" height="400"/>
+            <div id="child">
+                <img id="Next" src="RightArrow.png" class="img-responsive NextButton"/>
+                <img id="Previous" src="LeftArrow.png" class="img-responsive PreButton"/>
+            </div>
+        </div>
+        <div id="slider">
+            <ul class="slides none">
+                <li class="NoPaddingMarging slide ">
+                    <img src="slider1.jpg" alt="About Us" width="200" height="120"/>
+                </li>
+                <li class="NoPaddingMarging slide">
+                    <img src="slider2.jpg" alt="About Us" width="200" height="120"/>
+                </li>
+                <li class="NoPaddingMarging slide">
+                    <img src="slider3.jpg" alt="About Us" width="200" height="120"/>
+                </li>
+                <li class="NoPaddingMarging slide">
+                    <img src="slider4.jpg" alt="About Us" width="200" height="120"/>
+                </li>
+                <li class="NoPaddingMarging slide">
+                    <img src="slider5.jpg" alt="About Us" width="200" height="120"/>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    </div>
+</div>
+
+
+</body>
+</html>
+<script src="main.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var tn_array = $(".slides img").map(function () {
+            return $(this).attr("src");
+        }).get();
+        console.log('array img list,..',tn_array);
+
+        console.log('index image zero...',$('#MainImage').attr('src', tn_array[0]));
+        $('#MainImage').attr('src', tn_array[0]);
+        $('#Previous').css("visibility", "hidden");
+
+        var lengthImages = tn_array.length;
+        console.log('length images all...',lengthImages);
+        var CurrImage = 0;
+       /* var widthImg = 200;*/
+        var BottomLength = 1;
+      /*  var IndexDiff;*/
+
+       /* $('.slides li img').click(function () {
+            var Imagesrc = $(this).attr('src');
+            console.log('imagesrc selected....',Imagesrc);
+            var ImageIndex = $(this).parent('.slide').index();
+            console.log('imageindex !!!',ImageIndex);
+
+            $('#MainImage').fadeOut('slow', function () {
+                if (ImageIndex <= lengthImages - BottomLength) {
+                    IndexDiff = CurrImage;
+                    console.log('indexdifff...',IndexDiff);
+                    CurrImage = ImageIndex;
+                    console.log('Current images....',CurrImage);
+                    IndexDiff = Math.abs(IndexDiff - CurrImage);
+                    console.log('IndexDiff absulate..!!!!',IndexDiff);
+                    $('#slider .slides').animate({ 'margin-left': '-=' + widthImg * IndexDiff }, 500);
+                    $('#MainImage').attr('src', Imagesrc);
+
+                    if (ImageIndex != 0) {
+                        if ($('#Previous').css("visibility") == "hidden") {
+                            $('#Previous').css("visibility", "visible");
+                        }
+                    }
+                    if (ImageIndex == lengthImages - BottomLength) {
+                        if ($('#Next').css("visibility") == "visible") {
+                            $('#Next').css("visibility", "hidden");
+                        }
+                    }
+                }
+                else {
+                    $('#MainImage').attr('src', Imagesrc);
+                }
+            }).fadeIn(2000);
+        });*/
+        $('#Next').click(function () {
+
+            $('#MainImage').fadeOut('slow', function () {
+                CurrImage = CurrImage + 1; // Update current image index
+                console.log('current images!!!',CurrImage);
+                /*if (CurrImage <= lengthImages - BottomLength) {
+                    $('#slider .slides').animate({ 'margin-left': '-=' + widthImg }, 500); //animate left margin of the slides list with the value of -widthImg (-200px). So the bottom slider will animate to left side
+                }*/
+               /* console.log('lengthImages in next condi...',CurrImage === lengthImages - BottomLength);
+                console.log('next lengthImages in next condi...',  lengthImages);
+                console.log('BottomLength in next condi...',   BottomLength);*/
+
+                $('#MainImage').attr('src', tn_array[CurrImage]);
+              // set image to Main image
+                if (CurrImage == lengthImages - BottomLength) {
+                    $('#Next').css("visibility", "hidden");
+                }
+                if ($('#Previous').css("visibility") == "hidden") {
+                    $('#Previous').css("visibility", "visible");
+                }
+            }).fadeIn(300);
+
+        });
+        $('#Previous').click(function () {
+            $('#MainImage').fadeOut('slow', function () {
+                CurrImage = CurrImage - 1;
+                console.log('previous iamges....',CurrImage);
+               /* $('#slider .slides').animate({ 'margin-left': '+=' + widthImg }, 1000);*/
+                $('#MainImage').attr('src', tn_array[CurrImage]);
+                if (CurrImage == 0) {
+                    $('#Previous').css("visibility", "hidden");
+                }
+                if ($('#Next').css("visibility") == "hidden") {
+                    $('#Next').css("visibility", "visible");
+                }
+
+            }).fadeIn(200);
+        });
+
+
+       /* $('.slides li img').hover(function () {
+            $(this).css('cursor', 'pointer');
+            $(this).css({ 'filter': 'alpha(opacity=50)', 'opacity': '0.5' });
+        }, function () {
+            $(this).css('cursor', 'none');
+            $(this).css({ 'filter': 'alpha(opacity=100)', 'opacity': '1' });
+        });
+*/
+        //var CurrSlides = 0;
+
+        //setInterval(function () {
+        //    $('#slider .slides').animate({ 'margin-left': '-=200' }, 1000,
+        //        function () {
+        //            CurrSlides = CurrSlides + 1;
+        //            if (CurrSlides === tn_array.length-3) {
+        //                //CurrSlides = 0;
+        //                $('#slider .slides').css('margin-left', '600');
+        //            }
+        //        });
+        //}, 3000);
+    });
+
+
+
+</script>

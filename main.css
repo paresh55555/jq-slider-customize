@@ -1,0 +1,83 @@
+#MainDiv
+{
+    position: relative;
+    width: 86%;
+    border-radius: 42px;
+    background-color: #a1b1fb;
+    border: 20px solid #a1b1fb;
+}
+
+#child .NextButton
+{
+    position: absolute;
+    /*top: 50%;*/
+    top: 43%;
+    right: 2%;
+}
+
+#child .PreButton
+{
+    position: absolute;
+    /*top: 50%;*/
+    top: 43%;
+    left: 2%;
+}
+
+#Next
+{
+    opacity: 0.4;
+    filter: alpha(opacity=20);
+}
+
+#Next:hover
+{
+    cursor: pointer;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+
+#Previous
+{
+    opacity: 0.4;
+    filter: alpha(opacity=20);
+}
+
+#Previous:hover
+{
+    cursor: pointer;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+
+#slider
+{
+    width: 800px;
+    overflow: hidden;
+    position: relative;
+}
+
+#slider .slides
+{
+    display: block;
+    width: 8000px;
+    margin: 0;
+    padding: 0;
+}
+
+#slider .slide
+{
+    float: left;
+    list-style-type: none;
+    height:120px;
+    display: none;
+}
+.selectedImage
+{
+    border:2px solid Red;
+}
+.center{
+    text-align: -webkit-center;
+}
+.none{
+    display: none;
+}
